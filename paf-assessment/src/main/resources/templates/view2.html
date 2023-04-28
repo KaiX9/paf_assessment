@@ -48,7 +48,7 @@
     <br>
     <h3>Beers</h3>
     <br>
-    <form method="POST" data-th-action="@{/brewery/{breweryId}/order}">
+    <form method="POST" data-th-action="@{/brewery/{breweryId}/order}" data-th-object="${order}">
         <div>
             <button type="submit">Place Order</button>
         </div>
@@ -73,6 +73,7 @@
                     </td>
                 </tr>
             </tbody>
+        </table>
     </form>
   </body>
 </html>

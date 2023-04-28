@@ -7,15 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ibf2022.assessment.paf.batch3.models.Beer;
 import ibf2022.assessment.paf.batch3.models.Brewery;
+import ibf2022.assessment.paf.batch3.models.Order;
 import ibf2022.assessment.paf.batch3.models.Style;
 import ibf2022.assessment.paf.batch3.repositories.BeerRepository;
-import jakarta.servlet.http.HttpSession;
+import ibf2022.assessment.paf.batch3.services.BeerService;
+import jakarta.json.Json;
+import jakarta.json.JsonObject;
 
 @Controller
 @RequestMapping
@@ -23,6 +28,8 @@ public class BeerController {
 
 	@Autowired
 	private BeerRepository beerRepo;
+	@Autowired
+	private BeerService beerSvc;
 
 	//TODO Task 2 - view 0
 	@GetMapping(path="/view0.html")
@@ -62,5 +69,18 @@ public class BeerController {
 
 	
 	//TODO Task 5 - view 2, place order
-
+	@PostMapping(path="/brewery/{breweryId}/order")
+	public String placeOrder(@PathVariable Integer breweryId, @ModelAttribute Order order, Model m) {
+		
+		this.beerSvc.placeOrder(order, breweryId);
+		JsonObject jObj = Json.createObjectBuilder()
+							.add("orderId", order.getOrderId())
+							.add("date", order.getDate().toString())
+							.add("breweryId", order.getBreweryId())
+							.add("orders", order.getOrders().toString())
+							.build();
+		System.out.println(jObj);
+		m.addAttribute("order", order);
+		return "view3";
+	}
 }

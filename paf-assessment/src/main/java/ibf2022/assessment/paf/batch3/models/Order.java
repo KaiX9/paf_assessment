@@ -14,6 +14,14 @@ public class Order {
     
     private List<Order> orders = new ArrayList<Order>();
 
+    public Order(int beerId, int quantity) {
+    }
+
+    public void addOrder(int beerId, int quantity) {
+        Order order = new Order(beerId, quantity);
+        orders.add(order);
+    }
+
     public String getOrderId() {
         return orderId;
     }

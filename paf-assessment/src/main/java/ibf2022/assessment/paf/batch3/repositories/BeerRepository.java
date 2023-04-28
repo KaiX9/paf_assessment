@@ -17,6 +17,8 @@ import static ibf2022.assessment.paf.batch3.repositories.DBQueries.*;
 @Repository
 public class BeerRepository {
 
+	public static int br_id;
+
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
@@ -82,6 +84,7 @@ public class BeerRepository {
 
     		br.setBeers(beers);
 
+			br_id = br.getBreweryId();
 			return Optional.of(br);
 		}
 		
