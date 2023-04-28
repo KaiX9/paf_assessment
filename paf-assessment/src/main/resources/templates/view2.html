@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brewery Details</title>
+  </head>
+  <body>
+
+    <h2><span data-th-text="${breweryName}"></span></h2>
+    <br />
+    <a href="/view0.html">Back</a>
+    <br>
+    <div data-th-if="${!brewery.isPresent()}">
+        Brewery not found
+    </div>
+    <table data-th-if="${brewery.isPresent()}" data-th-object="${brewery.get()}">
+        <tr>
+            <td>Description:</td>
+            <td>
+                <span data-th-text="*{description}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>Address:</td>
+            <td>
+                <span data-th-text="*{address1}"></span><span data-th-text="*{address2}"></span>
+                <br>
+                <span data-th-text="*{city}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>Phone:</td>
+            <td>
+                <span data-th-text="*{phone}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>Website:</td>
+            <td>
+                <a data-th-href="@{${website}}">
+                    <span data-th-text="*{website}"></span>
+                </a>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <h3>Beers</h3>
+    <br>
+    <form method="POST" data-th-action="@{/brewery/{breweryId}/order}">
+        <div>
+            <button type="submit">Place Order</button>
+        </div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-th-each="b : ${beerList}" data-th-object="${b}">
+                    <td>
+                        <span data-th-text="*{beerName}"></span>
+                    </td>
+                    <td>
+                        <span data-th-text="*{beerDescription}"></span>
+                    </td>
+                    <td>
+                        <input type="number" name="quantity" id="quantity" min="1" step="1">
+                    </td>
+                </tr>
+            </tbody>
+    </form>
+  </body>
+</html>

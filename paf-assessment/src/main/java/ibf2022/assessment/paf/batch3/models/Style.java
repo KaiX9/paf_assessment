@@ -31,4 +31,5 @@ public class Style {
     public String toString() {
         return "Style [styleId=" + styleId + ", name=" + name + ", beerCount=" + beerCount + "]";
     }
+
 }
