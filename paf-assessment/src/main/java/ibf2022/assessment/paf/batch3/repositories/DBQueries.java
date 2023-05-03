@@ -6,6 +6,6 @@ public class DBQueries {
 
     public static final String GET_BREWERIES_BY_BEER = "select b.id as beer_id, br.id as brewery_id, b.name as beer_name, b.descript as description, br.name as brewery_name from beers as b join breweries as br on b.brewery_id = br.id where b.style_id = ? order by b.name asc";
 
-    public static final String GET_BEERS_FROM_BREWERY = "select br.id as brewery_id, br.name as name, br.city as city, br.descript as brewery_description, br.address1 as address1, br.address2 as address2, br.phone as phone, br.website as website, b.name as beer_name, b.descript as beer_description from breweries as br inner join beers as b on br.id = b.brewery_id where br.id = ?";
+    public static final String GET_BEERS_FROM_BREWERY = "select br.id as brewery_id, br.name as name, br.city as city, br.descript as brewery_description, br.address1 as address1, br.address2 as address2, br.phone as phone, br.website as website, b.id as beer_id, b.name as beer_name, b.descript as beer_description from breweries as br inner join beers as b on br.id = b.brewery_id where br.id = ?";
 
 }

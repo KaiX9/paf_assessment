@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Brewery Details</title>
   </head>
-  <body>
+  <body data-th-object="${brewery.get()}">
 
     <h2><span data-th-text="${breweryName}"></span></h2>
     <br />
-    <a href="/view0.html">Back</a>
+    <a href="/">Back</a>
     <br>
     <div data-th-if="${!brewery.isPresent()}">
         Brewery not found
     </div>
-    <table data-th-if="${brewery.isPresent()}" data-th-object="${brewery.get()}">
+    <table data-th-if="${brewery.isPresent()}">
         <tr>
             <td>Description:</td>
             <td>
@@ -39,7 +39,7 @@
         <tr>
             <td>Website:</td>
             <td>
-                <a data-th-href="@{${website}}">
+                <a data-th-href="@{*{website}}">
                     <span data-th-text="*{website}"></span>
                 </a>
             </td>
@@ -48,7 +48,7 @@
     <br>
     <h3>Beers</h3>
     <br>
-    <form method="POST" data-th-action="@{/brewery/{breweryId}/order}" data-th-object="${order}">
+    <form method="POST" data-th-action="@{/brewery/{breweryId}/order(breweryId=*{breweryId})}">
         <div>
             <button type="submit">Place Order</button>
         </div>
@@ -61,7 +61,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr data-th-each="b : ${beerList}" data-th-object="${b}">
+                <tr data-th-each="b, bIndex : ${beerList}" data-th-object="${b}">
                     <td>
                         <span data-th-text="*{beerName}"></span>
                     </td>
@@ -69,7 +69,7 @@
                         <span data-th-text="*{beerDescription}"></span>
                     </td>
                     <td>
-                        <input type="number" name="quantity" id="quantity" min="1" step="1">
+                        <input type="number" data-th-name="'quantity' + ${bIndex.index}" min="1" step="1">
                     </td>
                 </tr>
             </tbody>

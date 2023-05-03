@@ -8,10 +8,10 @@
 CREATE DATABASE IF NOT EXISTS brewery;
 USE brewery
 -- Run the commands below one by one in command line
-mysql -u Fred -p brewery < beers.sql
-mysql -u Fred -p brewery < breweries.sql
-mysql -u Fred -p brewery < categories.sql
-mysql -u Fred -p brewery < geocodes.sql
-mysql -u Fred -p brewery < styles.sql
+source C:/Users/Hp/TFIP_Feb23/PAF/assessment_template/database/beers.sql
+source C:/Users/Hp/TFIP_Feb23/PAF/assessment_template/database/breweries.sql
+source C:/Users/Hp/TFIP_Feb23/PAF/assessment_template/database/categories.sql
+source C:/Users/Hp/TFIP_Feb23/PAF/assessment_template/database/geocodes.sql
+source C:/Users/Hp/TFIP_Feb23/PAF/assessment_template/database/styles.sql
 
 SHOW tables; -- should see 5 tables in database brewery

@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.json.Json;
+import jakarta.json.JsonObjectBuilder;
+
 public class Order {
     
     private String orderId;
@@ -15,6 +18,11 @@ public class Order {
     private List<Order> orders = new ArrayList<Order>();
 
     public Order(int beerId, int quantity) {
+        this.beerId = beerId;
+        this.quantity = quantity;
+    }
+
+    public Order() {
     }
 
     public void addOrder(int beerId, int quantity) {
@@ -66,4 +74,9 @@ public class Order {
                 + ", quantity=" + quantity + ", orders=" + orders + "]";
     }
     
+    public JsonObjectBuilder toJSON() {
+        return Json.createObjectBuilder()
+                .add("beerId", beerId)
+                .add("quantity", quantity);
+    }
 }
